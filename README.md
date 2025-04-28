@@ -1,6 +1,12 @@
 # terraform-aws-ec2-resize-scheduler
 
-## Use example:
+## How to provide
+
+### Required tools
+- Terraform
+- AWS Account
+
+### Usage example:
 
 ```
 module "auto_resize_instance_a" {
@@ -10,8 +16,8 @@ module "auto_resize_instance_a" {
   desired_instance_type  = "t2.micro"
   cron_downsize          = "35 01 ? * * *"
   downsize_instance_type = "t2.nano"
-  aws_region             = var.aws_region
-  aws_profile            = var.aws_profile
+  aws_region             = <AWS_REGION_ID>
+  aws_profile            = <AWS_PROFILE_NAME>
 }
 
 module "auto_resize_instance_b" {
@@ -21,9 +27,18 @@ module "auto_resize_instance_b" {
   desired_instance_type  = "t2.micro"
   cron_downsize          = "35 01 ? * * *"
   downsize_instance_type = "t2.nano"
-  aws_region             = var.aws_region
-  aws_profile            = var.aws_profile
+  aws_region             = <AWS_REGION_ID>
+  aws_profile            = <AWS_PROFILE_NAME>
 }
 
-#module "auto_resize_inst......
+#module "auto_resize_instance_x....
+```
+
+### Install [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli), recommend to use official doc's.
+
+### Provision infrastructure with terraform.
+```
+terraform init
+terraform plan
+terraform apply
 ```
