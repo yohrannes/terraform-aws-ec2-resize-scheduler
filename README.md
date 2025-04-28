@@ -22,13 +22,13 @@ module "auto_resize_instance_a" {
 
 module "auto_resize_instance_b" {
   source                 = "yohrannes/ec2-resize-scheduler/aws"
-  instance_id            = "<INSTANCE_ID>"
+  instance_id            = "INSTANCE_ID"
   cron_resize            = "30 01 ? * MON-FRI *"
   desired_instance_type  = "t2.micro"
   cron_downsize          = "35 01 ? * * *"
   downsize_instance_type = "t2.nano"
-  aws_region             = <AWS_REGION_ID>
-  aws_profile            = <AWS_PROFILE_NAME>
+  aws_region             = "AWS_REGION_ID"
+  aws_profile            = "AWS_PROFILE_NAME"
 }
 
 #module "auto_resize_instance_x....
