@@ -1,7 +1,7 @@
 resource "aws_lambda_function" "ec2_downsize" {
   filename      = "${path.module}/lambda-functions/lambda-function-downsize.zip"
-  function_name = "downsize-ec2${lower(module.get_ec2_data.instance_name)}"
-  description   = "downsize-ec2${lower(module.get_ec2_data.instance_name)}"
+  function_name = "downsize-ec2-${lower(module.get_ec2_data.instance_name)}"
+  description   = "downsize-ec2-${lower(module.get_ec2_data.instance_name)}"
   role          = module.iam_roles.lambda_downsize_role_arn
   handler       = "lambda-function-downsize.lambda_handler"
   runtime       = "python3.8"
@@ -19,8 +19,8 @@ resource "aws_lambda_function" "ec2_downsize" {
 
 resource "aws_lambda_function" "ec2_resize" {
   filename      = "${path.module}/lambda-functions/lambda-function-resize.zip"
-  function_name = "resize-ec2${lower(module.get_ec2_data.instance_name)}"
-  description   = "resize-ec2${lower(module.get_ec2_data.instance_name)}"
+  function_name = "resize-ec2-${lower(module.get_ec2_data.instance_name)}"
+  description   = "resize-ec2-${lower(module.get_ec2_data.instance_name)}"
   role          = module.iam_roles.lambda_resize_role_arn
   handler       = "lambda-function-resize.lambda_handler"
   runtime       = "python3.8"

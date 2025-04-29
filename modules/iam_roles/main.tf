@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 # Policy para o Lambda responsável por "resize"
 resource "aws_iam_policy" "lambda_resize_policy" {
   name        = "lambda-resize-${lower(var.instance_name)}"
@@ -7,21 +9,21 @@ resource "aws_iam_policy" "lambda_resize_policy" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid    = "VisualEditor0",
+        Sid    = "AllowEC2Actions",
         Effect = "Allow",
         Action = [
           "ec2:StartInstances",
-          "ec2:StopInstances"
+          "ec2:StopInstances",
+          "ec2:ModifyInstanceAttribute"
         ],
-        Resource = "arn:aws:ec2:*:299391716392:instance/*"
+        Resource = "arn:aws:ec2:${var.aws_region}:${data.aws_caller_identity.current.account_id}:instance/${var.instance_id}"
       },
       {
-        Sid    = "VisualEditor1",
+        Sid    = "AllowDescribeActions",
         Effect = "Allow",
         Action = [
           "ec2:DescribeInstances",
-          "ec2:DescribeRegions",
-          "ec2:ModifyInstanceAttribute"
+          "ec2:DescribeRegions"
         ],
         Resource = "*"
       }
@@ -38,21 +40,21 @@ resource "aws_iam_policy" "lambda_downsize_policy" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid    = "VisualEditor0",
+        Sid    = "AllowEC2Actions",
         Effect = "Allow",
         Action = [
           "ec2:StartInstances",
-          "ec2:StopInstances"
+          "ec2:StopInstances",
+          "ec2:ModifyInstanceAttribute"
         ],
-        Resource = "arn:aws:ec2:*:299391716392:instance/*"
+        Resource = "arn:aws:ec2:${var.aws_region}:${data.aws_caller_identity.current.account_id}:instance/${var.instance_id}"
       },
       {
-        Sid    = "VisualEditor1",
+        Sid    = "AllowDescribeActions",
         Effect = "Allow",
         Action = [
           "ec2:DescribeInstances",
-          "ec2:DescribeRegions",
-          "ec2:ModifyInstanceAttribute"
+          "ec2:DescribeRegions"
         ],
         Resource = "*"
       }

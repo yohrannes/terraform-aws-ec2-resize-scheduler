@@ -1,6 +1,8 @@
 module "iam_roles" {
   source        = "./modules/iam_roles"
   instance_name = module.get_ec2_data.instance_name
+  instance_id   = var.instance_id
+  aws_region    = var.aws_region
 }
 
 module "event_bridge_triggers" {
